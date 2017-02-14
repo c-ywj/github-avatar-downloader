@@ -16,16 +16,12 @@ function getRepoContributors(repoOwner, repoName, cb) {
     }
   };
 
-  request(options, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-      console.log('result:', body) // Show the HTML for the Google homepage.
-    }
-  })
+  request(options, cb);
 
 }
 
-getRepoContributors("jquery", "jquery", function(err, result) {
-  console.log("Result:", result.body);
+getRepoContributors("jquery", "jquery", function(err, result, body) {
+  console.log("Body:", body);
 });
 
 
