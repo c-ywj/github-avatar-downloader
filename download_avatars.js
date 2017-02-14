@@ -37,8 +37,10 @@ function downloadImageByURL(url, filePath) {
   .pipe(fs.createWriteStream(filePath));
 }
 
+
 getRepoContributors(repoOwner, repoName, function(err, result, body) {
   if(repoOwner != null && repoName != null) {
+    //retrieved data (body) gets parsed into JSON object, forEach method loops over each element and passed into downloadImageByURL
     var objArray = JSON.parse(body);
     objArray.forEach(function(val) {
       console.log(val.avatar_url);
