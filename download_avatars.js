@@ -2,6 +2,9 @@ var request = require("request");
 
 var fs = require("fs");
 
+var repoOwner = process.argv[2];
+var repoName = process.argv[3];
+
 console.log("Welcome to the GitHub Avatar Downloader!");
 
 var GITHUB_USER = "c-ywj";
@@ -34,12 +37,18 @@ function downloadImageByURL(url, filePath) {
   .pipe(fs.createWriteStream(filePath));
 }
 
- getRepoContributors("jquery", "jquery", function(err, result, body) {
-   var objArray = JSON.parse(body);
-   objArray.forEach(function(val) {
-     console.log(val.avatar_url);
-     downloadImageByURL(val.avatar_url, "./avatars/" + val.login + ".jpg")
-   });
- });
+getRepoContributors(repoOwner, repoName, function(err, result, body) {
+  if(repoOwner != null && repoName != null) {
+    var objArray = JSON.parse(body);
+    objArray.forEach(function(val) {
+      console.log(val.avatar_url);
+      downloadImageByURL(val.avatar_url, "./avatars/" + val.login + ".jpg")
+    });
+  }
+  else {
+    console.log('Error! Please pass in valid user name and repository name!');
+  }
+});
+
 
 
