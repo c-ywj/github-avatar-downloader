@@ -22,7 +22,6 @@ function getRepoContributors(repoOwner, repoName, cb) {
   };
 //request method, brings in options object, cb defined @ getRepoContributors execution
   request(options, cb);
-
 }
 
 //downloadImageByURL makes requests to target url and downloads files into target filePath
@@ -36,7 +35,6 @@ function downloadImageByURL(url, filePath) {
   })
   .pipe(fs.createWriteStream(filePath));
 }
-
 
 getRepoContributors(repoOwner, repoName, function(err, result, body) {
   if(repoOwner != null && repoName != null) {
